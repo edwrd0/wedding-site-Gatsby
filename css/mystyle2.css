@@ -1,0 +1,170 @@
+        @font-face {
+            font-family: TheFontGatsby;
+            src: url(../fonts/TheFontGatsby.ttf);
+        }
+        
+        html {
+            width: auto;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0 auto;
+            box-sizing: border-box;
+            background-color: black;
+            overflow-x: hidden;
+        }
+        
+        header {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            font-size: 3em;
+            margin-top: 2em;
+        }
+        
+        h3 {
+            font-size: 3em;
+        }
+        
+        p {
+            font-size: 1.8em;
+            margin: 0 2em;
+        }
+        
+        h2,
+        p,
+        h3 {
+            color: white;
+            font-family: 'Limelight', cursive;
+            letter-spacing: 2px;
+        }
+        
+        header img {
+            margin: 0;
+            border: 0;
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        section {
+            background-color: black;
+            height: 100%;
+            margin: 0;
+            padding: 4em 0em 3em 0em;
+            text-align: center;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            box-sizing: border-box;
+            border: 0;
+            color: white;
+        }
+        
+        i {
+            margin: 1em 0 1em;
+        }
+        
+        section a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .map-container {
+            width: 100%;
+        }
+        
+        #map1,
+        #map2 {
+            width: 70%;
+            height: 600px;
+            margin: 0 auto;
+            border: solid 5px #966e0b;
+        }
+        
+        .map-container #map1,
+        .map-container #map2 {
+            padding: 2em;
+            width: 90%;
+            display: block;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .map-container div.clicked {
+            pointer-events: auto;
+        }
+        
+        .showimgmap {
+            display: none;
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+            .hidemap {
+                display: none !important;
+            }
+            .showimgmap {
+                display: inline;
+                width: 100%;
+            }
+        }
+        
+        footer {
+            background-color: black;
+            color: #966e0b;
+            text-align: center;
+            height: 100%;
+            margin: 0;
+            padding: 1em;
+            box-sizing: border-box;
+            border: 0;
+        }
+        
+        footer ul {
+            text-align: center;
+            margin: 0 auto;
+            padding: 0 auto;
+        }
+        
+        footer img {
+            margin: 1em;
+            text-align: center;
+        }
+        
+        footer li a {
+            color: #966e0b;
+            text-decoration: none;
+            padding: 1.5em;
+            margin: 1.5em;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        
+        ul {
+            margin: 0 auto;
+            padding: 0 auto;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        li img {
+            width: 500px;
+            height: 600px;
+        }
+        
+        .sliders {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+        }
