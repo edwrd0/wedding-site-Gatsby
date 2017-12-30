@@ -116,6 +116,15 @@
                 display: inline;
                 width: 100%;
             }
+            footer li a {
+                display: flex;
+                flex-flow: row;
+                justify-content: center;
+                padding: 0 !important;
+            }
+            footer ul {
+                padding: 0;
+            }
         }
         
         footer {
@@ -124,7 +133,6 @@
             text-align: center;
             height: 100%;
             margin: 0;
-            padding: 1em;
             box-sizing: border-box;
             border: 0;
         }
@@ -133,6 +141,9 @@
             text-align: center;
             margin: 0 auto;
             padding: 0 auto;
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
         }
         
         footer img {
@@ -167,4 +178,20 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: center;
+        }
+        
+        .inspi {
+            font-size: 25px;
+        }
+        
+        .inspititre {
+            margin-bottom: 0;
+        }
+        
+        .inspisection {
+            margin: 3em 0 0.5em 0;
+        }
+        
+        small {
+            margin: 2em;
         }
