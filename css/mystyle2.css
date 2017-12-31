@@ -139,8 +139,9 @@
         
         footer ul {
             text-align: center;
-            margin: 0 auto;
-            padding: 0 auto;
+            margin-top: 150px;
+/*            margin: 0 auto;
+*/            padding: 0 auto;
             display: flex;
             flex-flow: row;
             justify-content: center;
@@ -194,4 +195,11 @@
         
         small {
             margin: 2em;
+        }
+
+        #video {
+            position: relative;
+            margin-top: -35%;
+            margin-left: 11%;
+            margin-right: 11%;
         }
