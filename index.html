@@ -18,8 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
         <!--boxslider-->
         <link href="css/jquery.bxslider.css" rel="stylesheet" />
-        <!--video player -->
-        <link rel="stylesheet" href="css/plyr.css">
+
         <!--    CSS-->
         <link rel="stylesheet" type="text/css" href="css/mystyle2.css">
     </head>
@@ -30,192 +29,21 @@
             
         </header>
         <main>
-            <div id="video">
-                <video poster="img/fond-video.png" controls crossorigin>
-                    <!-- Video files -->
-                    <source src="https://www.youtube.com/embed/qxZ69kHv2OI" type="video/mp4">
-                    <!-- Text track file -->
-                    <!--     <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default> -->
-                    <!-- Fallback for browsers that don't support the <video> element -->
-                    <a href="video/Mariage_DG.mp4" download>Download</a>
-                </video>
-                
+            <div id="video-container">
+                <iframe src="https://www.youtube.com/embed/qxZ69kHv2OI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
-            <!-- <section class="adressecityall">
-                <a id="adresse"></a>
-                <img src="img/divider.gif" alt="">
-                <a href="https://goo.gl/maps/dVKDBQGU3Gm">
-                    <h2>✦ CITY HALL ADDRESS ✦ </h2>
-                    <p>10 Place Victor Hassebroucq</p>
-                    <p>59 200 Tourcoing</p>
-                </a>
-                <h3>11h45</h3>
-                <div class="map-container">
-                    <div id="map1" class="hidemap"></div>
-                    <a href="https://goo.gl/maps/dVKDBQGU3Gm"><img src="img/map1.png" alt="" class="showimgmap"></a>
-                </div>
-            </section>
-            <section class="adresseparty">
-                <img src="img/divider.gif" alt="">
-                <a href="https://goo.gl/maps/wKqophwfak92">
-                    <h2>✦ PARTY ADDRESS ✦</h2>
-                    <p>8 rue Louis Aragon</p>
-                    <p>59 118 Wambrechies</p>
-                </a>
-                <h3>17h00</h3>
-                <div class="map-container">
-                    <div id="map2" class="hidemap"></div>
-                    <a href="https://goo.gl/maps/wKqophwfak92"><img src="img/map2.png" alt="" class="showimgmap"></a>
-                </div>
-            </section>
-            <section class="#dresscode">
-                <a id="dresscode"></a>
-                <img src="img/divider.gif" alt="">
-                <h2 class="inspititre">✦ DRESS CODE ✦</h2>
-                <p class="inspi">(Pour inspiration)</p>
-                <div class="sliders">
-                    <div>
-                        <p class="inspisection">Dresses</p>
-                        <ul class="femmetenue">
-                            <li><img src="img/inspi/photo17.jpg" /></li>
-                            <li><img src="img/inspi/photo16.jpg" /></li>
-                            <li><img src="img/inspi/photo18.jpg" /></li>
-                            <li><img src="img/inspi/photo19.jpg" /></li>
-                            <li><img src="img/inspi/photo30.jpg" /></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="inspisection">Accessories</p>
-                        <ul class="femmecoiffure">
-                            <li><img src="img/inspi/photo20.jpg" /></li>
-                            <li><img src="img/inspi/photo1.jpg" /></li>
-                            <li><img src="img/inspi/photo28.jpg" /></li>
-                            <li><img src="img/inspi/photo29.jpg" /></li>
-                            <li><img src="img/inspi/photo32.jpg" /></li>
-                            <li><img src="img/inspi/photo33.jpg" /></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sliders">
-                    <div>
-                        <p class="inspisection">Suits</p>
-                        <ul class="hommetenue">
-                            <li><img src="img/inspi/photo7.jpg" /></li>
-                            <li><img src="img/inspi/photo8.jpg" /></li>
-                            <li><img src="img/inspi/photo12.jpg" /></li>
-                            <li><img src="img/inspi/photo9.jpg" /></li>
-                            <li><img src="img/inspi/photo10.jpg" /></li>
-                            <li><img src="img/inspi/photo11.jpg" /></li>
-                            <li><img src="img/inspi/photo13.jpg" /></li>
-                            <li><img src="img/inspi/photo26.jpg" /></li>
-                            <li><img src="img/inspi/photo25.jpg" /></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="inspisection">Accessories</p>
-                        <ul class="hommeaccessoire">
-                            <li><img src="img/inspi/photo21.jpg" /></li>
-                            <li><img src="img/inspi/photo15.jpg" /></li>
-                            <li><img src="img/inspi/photo14.jpg" /></li>
-                            <li><img src="img/inspi/photo22.jpg" /></li>
-                            <li><img src="img/inspi/photo23.jpg" /></li>
-                            <li><img src="img/inspi/photo24.jpg" /></li>
-                            <li><img src="img/inspi/photo27.jpg" /></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section class="listemariage">
-                <img src="img/divider.gif" alt="">
-                <h2>✦ WEDDING LIST ✦</h2>
-                <h3>Notre plus beau cadeau, c'est votre présence.</h3>
-                <p>Si vous souhaitez néanmoins nous offir un présent, nous vous suggérons une participation pour notre voyage à Venise prévu le lundi suivant les festivités.</p>
-                <p>Nous laisserons une urne si vous souhaitez y déposer une enveloppe.</p>
-                <p>Merci.</p>
-                <i class="fa fa-gift fa-4x" aria-hidden="true"></i>
-                <img src="img/divider.gif" alt="">
-            </section> -->
         </main>
         <footer>
             <ul>
                 <li>
                     <a href="#">Home</a>
-                    <!--                 <a href="#adresse">Address</a>
-                    <a href="#dresscode">Dress code</a> -->
                     <a href="https://www.facebook.com/events/1277598972304211/" target="_blank">Facebook</a>
                 </li>
             </ul>
-            <small>Copyright © MariageDG 2017</small>
+            <small id="copyright">Copyright © MariageDG 2017</small>
         </footer>
-        <script src="js/plyr.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
         <script src="js/jquery.bxslider.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function () {
-        $('.femmecoiffure').bxSlider({
-        slideWidth: 500
-        });
-        $('.femmetenue').bxSlider({
-        slideWidth: 500
-        });
-        $('.hommetenue').bxSlider({
-        slideWidth: 500
-        });
-        $('.hommeaccessoire').bxSlider({
-        slideWidth: 500
-        });
-        });
-        (function() {
-        // This is the bare minimum JavaScript. You can opt to pass no arguments to setup.
-        // e.g. just plyr.setup(); and leave it at that if you have no need for events
-        var instances = plyr.setup({
-        // Output to console
-        debug: false
-        });
-        // Get an element
-        function get(selector) {
-        return document.querySelector(selector);
-        }
-        // Custom event handler (just for demo)
-        function on(element, type, callback) {
-        if (!(element instanceof HTMLElement)) {
-        element = get(element);
-        }
-        element.addEventListener(type, callback, false);
-        }
-        // Loop through each instance
-        instances.forEach(function(instance) {
-        // Play
-        on('.js-play', 'click', function() {
-        instance.play();
-        });
-        
-        // Pause
-        on('.js-pause', 'click', function() {
-        instance.pause();
-        });
-        
-        // Stop
-        on('.js-stop', 'click', function() {
-        instance.stop();
-        });
-        
-        // Rewind
-        on('.js-rewind', 'click', function() {
-        instance.rewind();
-        });
-        
-        // Forward
-        on('.js-forward', 'click', function() {
-        instance.forward();
-        });
-        });
-        })();
-        </script>
-        <!--     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPqdHnrIbROCBCkKjKqxZs1y19xmOwz78&;sensor=FALSE"></script> -->
-        <script src="js/Map1.js" type="text/javascript"></script>
-        <script src="js/Map2.js" type="text/javascript"></script>
-        <script src="js/myjs.js" type="text/javascript"></script>
     </body>
 </html>
