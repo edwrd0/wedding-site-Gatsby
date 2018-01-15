@@ -17,8 +17,16 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <!--    FancyBox3-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
         <!--boxslider-->
         <link href="css/jquery.bxslider.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="js/jquery.cycle.lite.js"></script>
+        <script type="text/javascript" src="js/slideshow.js"></script>
+        <script>
+            slideshow('72157692268541585', 3500);
+        </script>
 
         <!--    CSS-->
         <link rel="stylesheet" type="text/css" href="css/mystyle2.css">
@@ -33,6 +41,26 @@
             <div id="video-container">
                 <iframe src="https://www.youtube.com/embed/qxZ69kHv2OI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
+            
+            <div id="slidecontainer">                     <!-- outer container.  Position this on your page where you want the slideshow. -->
+    <div id="controlcell" class="cell" ></div>    <!-- shows the top navigation buttons when hovered. -->
+    <div id="navcell" class="cell" ></div>        <!-- shows the thumbnails when hovered. -->
+    <div id="commoncell"></div>                   <!-- shows both navigation buttons and thumbnails when hovered. -->
+    <div id="controls">
+        <img src="images/previous.gif" class="button" id="prev" />
+        <img src="images/pause.gif" class="button" id="toggle"  />
+        <img src="images/next.gif" class="button" id="next" />
+    </div>
+
+    <ul id="cycle"></ul>                            <!-- This is the slideshow element.  Each photo is a <li>. -->
+    <div id="thumbs" >
+        <ul id="nav"></ul>
+    </div>      
+    <!-- Thumbnail navigation -->
+        <img src="images/play.gif" id="showButton" class="button"/>
+</div>
+
+
         </main>
         <footer>
             <ul>
@@ -43,8 +71,9 @@
             </ul>
             <small id="copyright">Copyright © MariageDG 2017</small>
         </footer>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
-        <script src="js/jquery.bxslider.js"></script>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+
     </body>
 </html>
