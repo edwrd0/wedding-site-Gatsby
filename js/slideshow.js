@@ -10,10 +10,10 @@ $(document).ready(function(){
 	$('#nav').hide();                                 
 	$('#controls').hide();
 	$('#nav').click(function(){togglePlay(0);});
-	$('#controlcell, #controls').hover(function(){$('#controls').show();},function(){$('#controls').hide();});
+	//$('#controlcell, #controls').hover(function(){$('#controls').show();},function(){$('#controls').hide();});
 	$('#showButton').click(function () {showToggle(1);});		
-	$('#commoncell, #cycle').hover(function(){$('#controls, #nav').show();},function(){$('#controls, #nav').hide();});
-	$('#navcell, #thumbs').hover(function(){ $('#nav').show();},function(){$('#nav').hide();});
+	//$('#commoncell, #cycle').hover(function(){$('#controls, #nav').show();},function(){$('#controls, #nav').hide();});
+	//$('#navcell, #thumbs').hover(function(){ $('#nav').show();},function(){$('#nav').hide();});
 
 });
 
@@ -83,8 +83,10 @@ function slideshow(photoset, slideTime) {                 //function that initia
 }
 
 function togglePlay(arg) {                             //toggles slideshow and navigation buttons
-	if (arg == 0) 
-	{bttnx = 0; $('#cycle').cycle('pause'); $('#toggle').attr('src', 'images/play.gif');}
+	if (arg == 0) {
+		bttnx = 0; $('#cycle').cycle('pause'); 
+		$('#toggle').attr('src', 'images/play.gif');
+		}
 	else if (arg == 1) 
 	{bttnx = 1; $('#cycle').cycle('resume', true); $('#toggle').attr('src', 'images/pause.gif');}
 }

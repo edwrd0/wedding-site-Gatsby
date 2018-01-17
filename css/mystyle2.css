@@ -175,8 +175,8 @@
         }
         
         li img {
-            width: 500px;
-            height: 600px;
+            width: 750px;
+            height: auto;
         }
 
         #copyright {
@@ -233,3 +233,84 @@
     width:100%;
     height:100%;
 }
+
+#slidecontainer { 
+    position: relative; 
+    margin: 8em;
+}
+
+#nav { 
+    margin: 0; 
+    padding: 0; 
+    overflow: hidden; 
+    position:absolute; 
+    left: -2000px; 
+    top:480px; 
+    z-index: 4;
+    width: 510px; 
+}
+
+#nav li {
+    list-style: none; 
+    float: left; 
+    margin: 0px; 
+    padding: 1px; 
+    background: #0090FF;
+}
+
+#nav li img { 
+    cursor: pointer; 
+    display: block; 
+    width: 49px; 
+    height: 49px;
+}
+
+#thumbs {
+    width: 750px;
+}
+
+.cell {
+    width: 750px; 
+    height: 270px; 
+    z-index: 2 
+}
+
+#controlcell {position: absolute; }
+
+#navcell {position: absolute; top: 240px;}
+
+#commoncell {position: absolute; top: 235px; width: 510px; height: 50px; z-index: 3;}
+
+#cycle {
+    margin: 0px 0px 0px 0px; 
+    padding: 0px; 
+    width: 750px; 
+    height: 800px; 
+    position: relative; 
+    z-index:3;
+    text-align: center;
+}
+
+#cycle li {
+    list-style: none; 
+    margin: 0px; 
+    padding: 0px;  
+    overflow: hidden; 
+    display: none;
+    text-align: center;
+}
+
+#cycle img {margin: 0px; padding: 0px; display:block;}
+
+.button {cursor: pointer; width:40px; height: 40px; top: 30px ; z-index: 4;}
+
+#prev {position: absolute; left: -2000px;}
+
+#next {position: absolute;  left: -2000px;}
+
+#toggle {position: absolute; left: -2000px ; opacity: 0.8; filter:alpha(opacity=80);}
+
+#showButton {position:absolute; left: 235px; top: 270px;}
+
+/*#container {position: absolute;}
+body { behavior:url("csshover.htc"); }*/
