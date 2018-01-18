@@ -174,10 +174,10 @@
             list-style: none;
         }
         
-        li img {
-            width: 750px;
+ /*       li img {
+            width: max-content;
             height: auto;
-        }
+        }*/
 
         #copyright {
             margin-top: 2em;
@@ -235,8 +235,9 @@
 }
 
 #slidecontainer { 
-    position: relative; 
-    margin: 8em;
+    margin: 2em 0 2em;
+    width: max-content;
+    height: 500px;
 }
 
 #nav { 
@@ -314,3 +315,50 @@
 
 /*#container {position: absolute;}
 body { behavior:url("csshover.htc"); }*/
+
+
+.hide
+{
+    display: none;
+}
+
+.slider
+{
+    -webkit-backface-visibility: hidden; /* obligatoire pour éviter l'effet de crénelage sous Chrome */
+
+    text-align: center;
+    transform: rotate(-3deg);
+    transform-origin: 50% 50%;
+}
+.slider figcaption
+{
+    color: #2A8782;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 0 0 4px grey;
+}
+.slider img
+{
+    background-color: white;
+    padding: 1em;
+    border-radius: 6px;
+    box-shadow: 0 0 8px black;
+}
+
+.toolbar ul
+{
+    /* structure */
+    padding-left: 0;
+
+    /* presentation */
+    list-style-type: none;
+    text-align: center;
+}
+.toolbar ul li
+{
+    display: inline-block;
+}
+.toolbar ul li + li
+{
+    margin-left: 1em;
+}

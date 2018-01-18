@@ -13,7 +13,7 @@
 
 var ver = 'Lite-1.7';
 var msie = /MSIE/.test(navigator.userAgent);
-
+console.log(msie);
 $.fn.cycle = function(options) {
     return this.each(function() {
         options = options || {};
