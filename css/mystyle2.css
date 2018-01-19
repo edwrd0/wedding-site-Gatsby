@@ -327,8 +327,8 @@ body { behavior:url("csshover.htc"); }*/
     -webkit-backface-visibility: hidden; /* obligatoire pour éviter l'effet de crénelage sous Chrome */
 
     text-align: center;
-    transform: rotate(-3deg);
-    transform-origin: 50% 50%;
+/*    transform: rotate(-3deg);
+    transform-origin: 50% 50%;*/
 }
 .slider figcaption
 {

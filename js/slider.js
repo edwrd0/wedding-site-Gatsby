@@ -12,42 +12,41 @@ const TOUCHE_DROITE = 39;
 
 // La liste des slides du carrousel.
 
-var slides =
-[
-    { image: 'images/1.jpg', legend: 'Street Art'          },
-    { image: 'images/2.jpg', legend: 'Fast Lane'           },
-    { image: 'images/3.jpg', legend: 'Colorful Building'   },
-    { image: 'images/4.jpg', legend: 'Skyscrapers'         },
-    { image: 'images/5.jpg', legend: 'City by night'       },
-    { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
-];
+var slides = [];
 
 // Objet contenant l'état du carrousel.
 var state;
 
-
+var listLength = 0; 
 
 /***********************************************************************************/
 /* ******************************** FONCTIONS CARROUSEL ****************************/
 /***********************************************************************************/
 
 function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
-    json = data;
+
     for (var i=0; i < data.photoset.photo.length ; ++i)
-    {var template = '<li id="' + i + '"><a href="http://www.flickr.com/photos/' + 
-        data.photoset.owner + '/' + data.photoset.photo[i].id + '" ><img id="' + 
-        data.photoset.photo[i].id + '" src="http://farm' + data.photoset.photo[i].farm + 
-        '.static.flickr.com/' + data.photoset.photo[i].server + '/' + data.photoset.photo[i].id + '_' + 
-        data.photoset.photo[i].secret + '.jpg"' + 'alt="' + data.photoset.photo[i].title + '" /></a></li>';
-    $('#cycle, #nav').append(template);
-    listLength += 1;
-    }}
-    
-function slideshow(photoset, slideTime) {                 //function that initializes AJAX call and slideshow 
-    var url = 'http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
-    console.log(url);
+
+    {
+        var link = "http://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
+        
+        var src = "http://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
+        data.photoset.photo[i].secret + ".jpg";
+        
+        var alt = "photo numéro: " + data.photoset.photo[i].title ;
+        
+        var photo = { link: link, src: src, alt: alt};
+        slides.push( photo );
+
+        
+        listLength += 1;
+    }
+    refreshSlider();
+}
+
+function slideshow(photoset) {                 //function that initializes AJAX call and slideshow 
+    var url = 'https://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
     $.getJSON( url , setFlickrdata);
-    timeOut = slideTime;
 }
 
 function onSliderGoToNext()
@@ -147,10 +146,10 @@ function onSliderToggle()
     var icon;
 
     // Modification de l'icône du bouton pour démarrer ou arrêter le carrousel.
-    icon = document.querySelector('#slider-toggle i');
+    // icon = document.querySelector('#slider-toggle i');
 
-    icon.classList.toggle('fa-play');
-    icon.classList.toggle('fa-pause');
+    // icon.classList.toggle('fa-play');
+    // icon.classList.toggle('fa-pause');
 
     // Est-ce que le carousel est démarré ?
     if(state.timer == null)
@@ -168,7 +167,7 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        this.title = 'Arrêter le carrousel';
+        // this.title = 'Arrêter le carrousel';
     }
     else
     {
@@ -188,7 +187,7 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        this.title = 'Démarrer le carrousel';
+        // this.title = 'Démarrer le carrousel';
     }
 }
 
@@ -224,18 +223,23 @@ function onToolbarToggle()
 
 function refreshSlider()
 {
-    var sliderImage;
-    var sliderLegend;
+    var sliderLink;
+    var sliderSrc;
+    var sliderAlt;
 
     // Recherche des balises de contenu du carrousel.
-    sliderImage  = document.querySelector('#slider img');
-    sliderLegend = document.querySelector('#slider figcaption');
+    sliderSrc  = document.querySelector('#slider img');
+    sliderLink = document.querySelector('#slider a');
+    sliderAlt = document.querySelector('#slider img');
+
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
-    sliderImage.src          = slides[state.index].image;
-    sliderLegend.textContent = slides[state.index].legend;
+    //setTimeout(function(){
+    sliderSrc.src = slides[state.index].src;
+    sliderLink.href = slides[state.index].link;
+    sliderAlt.alt = slides[state.index].alt;
+//},500);
 }
-
 
 
 /***********************************************************************************/
@@ -258,11 +262,11 @@ document.addEventListener('DOMContentLoaded', function()
 
 
     // Installation des gestionnaires d'évènement.
-    installEventHandler('#slider-random', 'click', onSliderGoToRandom);
-    installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
-    installEventHandler('#slider-next', 'click', onSliderGoToNext);
-    installEventHandler('#slider-toggle', 'click', onSliderToggle);
-    installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
+    // installEventHandler('#slider-random', 'click', onSliderGoToRandom);
+    // installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
+    // installEventHandler('#slider-next', 'click', onSliderGoToNext);
+    // installEventHandler('#slider-toggle', 'click', onSliderToggle);
+    // installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
 
     /*
      * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
@@ -275,5 +279,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 
     // Affichage initial.
-    refreshSlider();
+    slideshow('72157692268541585');
+    onSliderToggle();
+
 });

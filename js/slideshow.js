@@ -77,7 +77,6 @@ function beforeLoad(curr, next, opts) {             //initializes slideshow to b
 
 function slideshow(photoset, slideTime) {                 //function that initializes AJAX call and slideshow 
     var url = 'http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
-    console.log(url);
 	$.getJSON( url , setFlickrdata);
 	timeOut = slideTime;
 }
