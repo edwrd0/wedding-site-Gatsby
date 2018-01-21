@@ -42,6 +42,7 @@ function setFlickrdata(data) {     //function to use AJAX calls to pull the Flic
         listLength += 1;
     }
     refreshSlider();
+    adaptiveResize();
 }
 
 function slideshow(photoset) {                 //function that initializes AJAX call and slideshow 
@@ -100,6 +101,7 @@ function onSliderGoToRandom()
 
     // Mise à jour de l'affichage.
     refreshSlider();
+    adaptiveResize();
 }
 
 /*
@@ -146,16 +148,16 @@ function onSliderToggle()
     var icon;
 
     // Modification de l'icône du bouton pour démarrer ou arrêter le carrousel.
-    // icon = document.querySelector('#slider-toggle i');
+    icon = document.querySelector('#slider-toggle i');
 
-    // icon.classList.toggle('fa-play');
-    // icon.classList.toggle('fa-pause');
+    icon.classList.toggle('fa-play');
+    icon.classList.toggle('fa-pause');
 
     // Est-ce que le carousel est démarré ?
     if(state.timer == null)
     {
         // Non, démarrage du carousel, toutes les deux secondes.
-        state.timer = window.setInterval(onSliderGoToNext, 2000);
+        state.timer = window.setInterval(onSliderGoToRandom, 2000);
 
         /*
          * Modification du libellé du bouton en mode "OFF".
@@ -167,7 +169,7 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        // this.title = 'Arrêter le carrousel';
+        this.title = 'Arrêter le carrousel';
     }
     else
     {
@@ -187,7 +189,7 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        // this.title = 'Démarrer le carrousel';
+        this.title = 'Démarrer le carrousel';
     }
 }
 
@@ -239,8 +241,30 @@ function refreshSlider()
     sliderLink.href = slides[state.index].link;
     sliderAlt.alt = slides[state.index].alt;
 //},500);
+
 }
 
+function adaptiveResize() 
+{
+
+    var $w, $target, $h;
+
+    $target = $('#slider img');
+
+    $target.each(function() 
+    {
+
+        $h = $(this).parent().height();
+
+    });
+
+    if($h <= 560)
+    {
+        $target.css('height', 560 );
+
+    };
+
+}
 
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
@@ -262,11 +286,11 @@ document.addEventListener('DOMContentLoaded', function()
 
 
     // Installation des gestionnaires d'évènement.
-    // installEventHandler('#slider-random', 'click', onSliderGoToRandom);
-    // installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
-    // installEventHandler('#slider-next', 'click', onSliderGoToNext);
-    // installEventHandler('#slider-toggle', 'click', onSliderToggle);
-    // installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
+    installEventHandler('#slider-random', 'click', onSliderGoToRandom);
+    installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
+    installEventHandler('#slider-next', 'click', onSliderGoToNext);
+    installEventHandler('#slider-toggle', 'click', onSliderToggle);
+    installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
 
     /*
      * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
