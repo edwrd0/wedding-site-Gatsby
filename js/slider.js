@@ -19,47 +19,53 @@ var state;
 
 var listLength = 0; 
 
+var etat;
+
+
 /***********************************************************************************/
 /* ******************************** FONCTIONS CARROUSEL ****************************/
 /***********************************************************************************/
 
-function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
 
-    for (var i=0; i < data.photoset.photo.length ; ++i)
 
-    {
-        var link = "http://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
+// function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
+
+//     for (var i=0; i < data.photoset.photo.length ; ++i)
+
+//     {
+//         var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
         
-        var src = "http://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
-        data.photoset.photo[i].secret + ".jpg";
+//         var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
+//         data.photoset.photo[i].secret + ".jpg";
         
-        var alt = "photo numéro: " + data.photoset.photo[i].title ;
+//         var alt = "photo numéro: " + data.photoset.photo[i].title ;
         
-        var photo = { link: link, src: src, alt: alt};
-        slides.push( photo );
+//         var photo = { link: link, src: src, alt: alt};
+//         slides.push( photo );
 
         
-        listLength += 1;
-    }
-    refreshSlider();
-    adaptiveResize();
-}
+//         listLength += 1;
+//     }
+//     refreshSlider();
+//     adaptiveResize();
+// }
 
-function slideshow(photoset) {                 //function that initializes AJAX call and slideshow 
-    var url = 'https://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
-    $.getJSON( url , setFlickrdata);
-}
+// function slideshow(photoset) {                 //function that initializes AJAX call and slideshow 
+//     var url = 'https://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
+//     console.log(url);
+//     $.getJSON( url , setFlickrdata);
+// }
 
 function onSliderGoToNext()
 {
     // Passage à la slide suivante.
-    state.index++;
+    state++;
 
     // Est-ce qu'on est arrivé à la fin de la liste des slides ?
-    if(state.index == slides.length)
+    if(state == 256)
     {
         // Oui, on revient au début (le carrousel est circulaire).
-        state.index = 0;
+        state = 0;
     }
 
     // Mise à jour de l'affichage.
@@ -69,13 +75,13 @@ function onSliderGoToNext()
 function onSliderGoToPrevious()
 {
     // Passage à la slide précédente.
-    state.index--;
+    state--;
 
     // Est-ce qu'on est revenu au début de la liste des slides ?
-    if(state.index < 0)
+    if(state < 0)
     {
         // Oui, on revient à la fin (le carrousel est circulaire).
-        state.index = slides.length - 1;
+        state = 256 - 1;
     }
 
     // Mise à jour de l'affichage.
@@ -84,24 +90,26 @@ function onSliderGoToPrevious()
 
 function onSliderGoToRandom()
 {
-    var index;
 
-    do
-    {
-        /*
-         * Récupération d'un numéro de slide aléatoire différent
-         * du numéro de slide actuel.
-         */
-        index = getRandomInteger(0, slides.length - 1);
-    }
-    while(index == state.index);
+    state = getRandomInteger(0, 255);
+    // var index;
 
-    // Passage à une slide aléatoire.
-    state.index = index;
+    // do
+    // {
+    //     /*
+    //      * Récupération d'un numéro de slide aléatoire différent
+    //      * du numéro de slide actuel.
+    //      */
+    //     index = getRandomInteger(0, slides.length - 1);
+    // }
+    // while(index == state.index);
+
+    // // Passage à une slide aléatoire.
+    // state.index = index;
 
     // Mise à jour de l'affichage.
     refreshSlider();
-    adaptiveResize();
+    // adaptiveResize();
 }
 
 /*
@@ -154,10 +162,10 @@ function onSliderToggle()
     icon.classList.toggle('fa-pause');
 
     // Est-ce que le carousel est démarré ?
-    if(state.timer == null)
+    if(etat.timer == null)
     {
         // Non, démarrage du carousel, toutes les deux secondes.
-        state.timer = window.setInterval(onSliderGoToRandom, 2000);
+        etat.timer = window.setInterval(onSliderGoToRandom, 2500);
 
         /*
          * Modification du libellé du bouton en mode "OFF".
@@ -169,15 +177,15 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        this.title = 'Arrêter le carrousel';
+        // this.title = 'Arrêter le carrousel';
     }
     else
     {
         // Oui, arrêt du carousel.
-        window.clearInterval(state.timer);
+        window.clearInterval(etat.timer);
 
         // Réinitialisation de la propriété pour le prochain clic sur le bouton.
-        state.timer = null;
+        etat.timer = null;
 
         /*
          * Modification du libellé du bouton en mode "ON".
@@ -189,7 +197,7 @@ function onSliderToggle()
          * l'évènement, donc la variable spéciale this vaut la même chose
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
-        this.title = 'Démarrer le carrousel';
+        // this.title = 'Démarrer le carrousel';
     }
 }
 
@@ -225,46 +233,61 @@ function onToolbarToggle()
 
 function refreshSlider()
 {
-    var sliderLink;
-    var sliderSrc;
-    var sliderAlt;
+    var sliderImage;
+    // var sliderLegend;
 
     // Recherche des balises de contenu du carrousel.
-    sliderSrc  = document.querySelector('#slider img');
-    sliderLink = document.querySelector('#slider a');
-    sliderAlt = document.querySelector('#slider img');
-
+    sliderImage  = document.querySelector('#slider img');
+    // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
-    //setTimeout(function(){
-    sliderSrc.src = slides[state.index].src;
-    sliderLink.href = slides[state.index].link;
-    sliderAlt.alt = slides[state.index].alt;
-//},500);
-
+    sliderImage.src          = 'img/photos/'+ state + '.JPG';
+    // sliderLegend.textContent = slides[state.index].legend;
 }
 
-function adaptiveResize() 
-{
 
-    var $w, $target, $h;
+// function refreshSlider()
+// {
+//     var sliderLink;
+//     var sliderSrc;
+//     var sliderAlt;
 
-    $target = $('#slider img');
+//     // Recherche des balises de contenu du carrousel.
+//     sliderSrc  = document.querySelector('#slider img');
+//     sliderLink = document.querySelector('#slider a');
+//     sliderAlt = document.querySelector('#slider img');
 
-    $target.each(function() 
-    {
 
-        $h = $(this).parent().height();
+//     // Changement de la source de l'image et du texte de la légende du carrousel.
+//     //setTimeout(function(){
+//     sliderSrc.src = slides[state.index].src;
+//     sliderLink.href = slides[state.index].link;
+//     sliderAlt.alt = slides[state.index].alt;
+// //},500);
 
-    });
+// }
 
-    if($h <= 560)
-    {
-        $target.css('height', 560 );
+// function adaptiveResize() 
+// {
 
-    };
+//     var $w, $target, $h;
 
-}
+//     $target = $('#slider img');
+
+//     $target.each(function() 
+//     {
+
+//         $h = $(this).parent().height();
+
+//     });
+
+//     if($h <= 560)
+//     {
+//         $target.css('height', 560 );
+
+//     };
+
+// }
 
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
@@ -280,9 +303,9 @@ function adaptiveResize()
 document.addEventListener('DOMContentLoaded', function()
 {
     // Initialisation du carrousel.
-    state       = {};
-    state.index = 0;                   // On commence à la première slide
-    state.timer = null;                // Le carrousel est arrêté au démarrage
+    etat       = {};
+    etat.index = 0;                   // On commence à la première slide
+    etat.timer  = null;                // Le carrousel est arrêté au démarrage
 
 
     // Installation des gestionnaires d'évènement.
@@ -303,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 
     // Affichage initial.
-    slideshow('72157692268541585');
+    // slideshow('72157692268541585');
     onSliderToggle();
 
 });
