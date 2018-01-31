@@ -27,89 +27,87 @@ var etat;
 /***********************************************************************************/
 
 
+function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
 
-// function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
+    for (var i=0; i < data.photoset.photo.length ; ++i)
 
-//     for (var i=0; i < data.photoset.photo.length ; ++i)
-
-//     {
-//         var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
-        
-//         var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
-//         data.photoset.photo[i].secret + ".jpg";
-        
-//         var alt = "photo numéro: " + data.photoset.photo[i].title ;
-        
-//         var photo = { link: link, src: src, alt: alt};
-//         slides.push( photo );
-
-        
-//         listLength += 1;
-//     }
-//     refreshSlider();
-//     adaptiveResize();
-// }
-
-// function slideshow(photoset) {                 //function that initializes AJAX call and slideshow 
-//     var url = 'https://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&api_key=fc8d0bce9e99848af3ff4f9a0a79bf28&photoset_id='+ photoset + '&jsoncallback=?';
-//     console.log(url);
-//     $.getJSON( url , setFlickrdata);
-// }
-
-function onSliderGoToNext()
-{
-    // Passage à la slide suivante.
-    state++;
-
-    // Est-ce qu'on est arrivé à la fin de la liste des slides ?
-    if(state == 256)
     {
-        // Oui, on revient au début (le carrousel est circulaire).
-        state = 0;
-    }
+        // var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
+        var link = data.photoset.photo[i].url_o;
+        
+        var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
+        data.photoset.photo[i].secret + ".jpg";
+        
+        var alt = "photo numéro: " + data.photoset.photo[i].title ;
+        
+        var photo = { link: link, src: src, alt: alt};
+        slides.push( photo );
 
-    // Mise à jour de l'affichage.
+        
+        listLength += 1;
+    }
     refreshSlider();
 }
 
-function onSliderGoToPrevious()
-{
-    // Passage à la slide précédente.
-    state--;
+function slideshow(){
 
-    // Est-ce qu'on est revenu au début de la liste des slides ?
-    if(state < 0)
-    {
-        // Oui, on revient à la fin (le carrousel est circulaire).
-        state = 256 - 1;
+    var mydata = $.getJSON('/js/flickr_original.json' , setFlickrdata);
+
+    console.log(mydata);
+
+}
+
+function onSliderGoToNext() {
+    // Passage à la slide suivante.
+    state.index++;
+
+    // Est-ce qu'on est arrivé à la fin de la liste des slides ?
+    if (state.index == slides.length) {
+        // Oui, on revient au début (le carrousel est circulaire).
+        state.index = 0;
     }
 
     // Mise à jour de l'affichage.
     refreshSlider();
+
+}
+
+function onSliderGoToPrevious() {
+    // Passage à la slide précédente.
+    state.index--;
+
+    // Est-ce qu'on est revenu au début de la liste des slides ?
+    if (state.index < 0) {
+        // Oui, on revient à la fin (le carrousel est circulaire).
+        state.index = slides.length - 1;
+    }
+
+    // Mise à jour de l'affichage.
+    refreshSlider();
+
 }
 
 function onSliderGoToRandom()
 {
 
-    state = getRandomInteger(0, 255);
-    // var index;
+   var index;
 
-    // do
-    // {
-    //     /*
-    //      * Récupération d'un numéro de slide aléatoire différent
-    //      * du numéro de slide actuel.
-    //      */
-    //     index = getRandomInteger(0, slides.length - 1);
-    // }
-    // while(index == state.index);
+    do
+    {
+        /*
+         * Récupération d'un numéro de slide aléatoire différent
+         * du numéro de slide actuel.
+         */
+        index = getRandomInteger(0, slides.length - 1);
+    }
+    while(index == state.index);
 
-    // // Passage à une slide aléatoire.
-    // state.index = index;
+    // Passage à une slide aléatoire.
+    state.index = index;
 
     // Mise à jour de l'affichage.
     refreshSlider();
-    // adaptiveResize();
+
 }
 
 /*
@@ -151,8 +149,7 @@ function onSliderKeyUp(event)
     }
 }
 
-function onSliderToggle()
-{
+function onSliderToggle() {
     var icon;
 
     // Modification de l'icône du bouton pour démarrer ou arrêter le carrousel.
@@ -162,10 +159,9 @@ function onSliderToggle()
     icon.classList.toggle('fa-pause');
 
     // Est-ce que le carousel est démarré ?
-    if(etat.timer == null)
-    {
+    if (state.timer == null) {
         // Non, démarrage du carousel, toutes les deux secondes.
-        etat.timer = window.setInterval(onSliderGoToRandom, 2500);
+        state.timer = window.setInterval(onSliderGoToRandom, 2500);
 
         /*
          * Modification du libellé du bouton en mode "OFF".
@@ -178,14 +174,12 @@ function onSliderToggle()
          * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
          */
         // this.title = 'Arrêter le carrousel';
-    }
-    else
-    {
+    } else {
         // Oui, arrêt du carousel.
-        window.clearInterval(etat.timer);
+        window.clearInterval(state.timer);
 
         // Réinitialisation de la propriété pour le prochain clic sur le bouton.
-        etat.timer = null;
+        state.timer = null;
 
         /*
          * Modification du libellé du bouton en mode "ON".
@@ -231,63 +225,48 @@ function onToolbarToggle()
     document.querySelector('.toolbar ul').classList.toggle('hide');
 }
 
+
 function refreshSlider()
 {
-    var sliderImage;
-    // var sliderLegend;
+    var sliderLink;
+    var sliderSrc;
+    var sliderAlt;
 
     // Recherche des balises de contenu du carrousel.
-    sliderImage  = document.querySelector('#slider img');
-    // sliderLegend = document.querySelector('#slider figcaption');
+    sliderSrc  = document.querySelector('#slider img');
+    sliderLink = document.querySelector('#slider a');
+    sliderAlt = document.querySelector('#slider img');
+
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
-    sliderImage.src          = 'img/photos/'+ state + '.JPG';
-    // sliderLegend.textContent = slides[state.index].legend;
+    sliderSrc.src = slides[state.index].src;
+    sliderLink.href = slides[state.index].link;
+    sliderAlt.alt = slides[state.index].alt;
+    adaptiveResize();
+
 }
 
+function adaptiveResize() 
+{
 
-// function refreshSlider()
-// {
-//     var sliderLink;
-//     var sliderSrc;
-//     var sliderAlt;
+    var $w, $target, $h;
 
-//     // Recherche des balises de contenu du carrousel.
-//     sliderSrc  = document.querySelector('#slider img');
-//     sliderLink = document.querySelector('#slider a');
-//     sliderAlt = document.querySelector('#slider img');
+    $target = $('#slider img');
 
+    $target.each(function() 
+    {
 
-//     // Changement de la source de l'image et du texte de la légende du carrousel.
-//     //setTimeout(function(){
-//     sliderSrc.src = slides[state.index].src;
-//     sliderLink.href = slides[state.index].link;
-//     sliderAlt.alt = slides[state.index].alt;
-// //},500);
+        $h = $(this).parent().height();
 
-// }
+    });
 
-// function adaptiveResize() 
-// {
+    if($h <= 560)
+    {
+        $target.css('height', 560 );
 
-//     var $w, $target, $h;
+    };
 
-//     $target = $('#slider img');
-
-//     $target.each(function() 
-//     {
-
-//         $h = $(this).parent().height();
-
-//     });
-
-//     if($h <= 560)
-//     {
-//         $target.css('height', 560 );
-
-//     };
-
-// }
+}
 
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
@@ -303,10 +282,9 @@ function refreshSlider()
 document.addEventListener('DOMContentLoaded', function()
 {
     // Initialisation du carrousel.
-    etat       = {};
-    etat.index = 0;                   // On commence à la première slide
-    etat.timer  = null;                // Le carrousel est arrêté au démarrage
-
+    state = {};
+    state.index = 0; // On commence à la première slide
+    state.timer = null; // Le carrousel est arrêté au démarrage
 
     // Installation des gestionnaires d'évènement.
     installEventHandler('#slider-random', 'click', onSliderGoToRandom);
@@ -326,7 +304,8 @@ document.addEventListener('DOMContentLoaded', function()
 
 
     // Affichage initial.
-    // slideshow('72157692268541585');
+
+    slideshow();
     onSliderToggle();
 
 });

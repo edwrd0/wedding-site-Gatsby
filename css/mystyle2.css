@@ -244,10 +244,8 @@
     -webkit-backface-visibility: hidden; /* obligatoire pour éviter l'effet de crénelage sous Chrome */
     height: 560px;
     text-align: center;
-    margin: auto;
+    margin: 0 auto;
 
-/*    transform: rotate(-3deg);
-    transform-origin: 50% 50%;*/
 }
 
 #back-album{
@@ -263,12 +261,12 @@
 .slider img
 {
     background-color: black;
-    border-radius: 35px;
+    border-radius: 20px;
     box-shadow: 0 0 8px black;
-    max-height: 560px;
-    max-width: 1000px;
-    -webkit-filter: sepia(0.4);
-    filter: sepia(0.4);
+    height: 100%;
+/*    max-height: 560px;
+    max-width: 1000px;*/
+
 }
 
 .toolbar ul
@@ -279,6 +277,7 @@
     /* presentation */
     list-style-type: none;
     text-align: center;
+    margin-bottom: 1em;
 }
 .toolbar ul li
 {
