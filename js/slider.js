@@ -1,4 +1,4 @@
-'use strict';   // Mode strict du JavaScript
+'use strict'; // Mode strict du JavaScript
 
 /***********************************************************************************/
 /* ********************************* DONNEES CARROUSEL *****************************/
@@ -17,9 +17,9 @@ var slides = [];
 // Objet contenant l'état du carrousel.
 var state;
 
-var listLength = 0; 
+var listLength = 0;
 
-var etat;
+var etat = [];
 
 
 /***********************************************************************************/
@@ -27,33 +27,35 @@ var etat;
 /***********************************************************************************/
 
 
-function setFlickrdata(data) {     //function to use AJAX calls to pull the Flickr photoset as JSON.
+function setFlickrdata(data) { //function to use AJAX calls to pull the Flickr photoset as JSON.
 
-    for (var i=0; i < data.photoset.photo.length ; ++i)
+    for (var i = 0; i < data.photoset.photo.length; ++i)
 
     {
         // var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
         var link = data.photoset.photo[i].url_o;
-        
-        var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" + 
-        data.photoset.photo[i].secret + ".jpg";
-        
-        var alt = "photo numéro: " + data.photoset.photo[i].title ;
-        
-        var photo = { link: link, src: src, alt: alt};
-        slides.push( photo );
 
-        
+        var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" +
+            data.photoset.photo[i].secret + ".jpg";
+
+        var alt = "photo numéro: " + data.photoset.photo[i].title;
+
+        var photo = {
+            link: link,
+            src: src,
+            alt: alt
+        };
+        slides.push(photo);
+
+
         listLength += 1;
     }
-    refreshSlider();
+
 }
 
-function slideshow(){
+function slideshow() {
 
-    var mydata = $.getJSON('/js/flickr_original.json' , setFlickrdata);
-
-    console.log(mydata);
+    var mydata = $.getJSON('/js/flickr_original.json', setFlickrdata);
 
 }
 
@@ -87,24 +89,24 @@ function onSliderGoToPrevious() {
 
 }
 
-function onSliderGoToRandom()
-{
+function onSliderGoToRandom() {
 
-   var index;
-
-    do
-    {
+    var index;
+    if (etat.length == slides.length - 1) {
+        etat = [];
+    }
+    do {
         /*
          * Récupération d'un numéro de slide aléatoire différent
          * du numéro de slide actuel.
          */
         index = getRandomInteger(0, slides.length - 1);
     }
-    while(index == state.index);
+    while (etat.indexOf(index) >= 0 && etat.length == 255);
 
     // Passage à une slide aléatoire.
     state.index = index;
-
+    etat.push(state.index);
     // Mise à jour de l'affichage.
     refreshSlider();
 
@@ -119,8 +121,7 @@ function onSliderGoToRandom()
  *
  * Mais ici on va en avoir besoin...
  */
-function onSliderKeyUp(event)
-{
+function onSliderKeyUp(event) {
     /*
      * Les gestionnaires d'évènements d'appui sur une touche (évènements
      * keydown, keyup, keypress) contiennent une propriété keyCode dans l'objet
@@ -130,19 +131,18 @@ function onSliderKeyUp(event)
      * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
      */
 
-    switch(event.keyCode)
-    {
-        case TOUCHE_DROITE:
+    switch (event.keyCode) {
+    case TOUCHE_DROITE:
         // On passe à la slide suivante.
         onSliderGoToNext();
         break;
 
-        case TOUCHE_ESPACE:
+    case TOUCHE_ESPACE:
         // On démarre ou on arrête le carrousel.
         onSliderToggle();
         break;
 
-        case TOUCHE_GAUCHE:
+    case TOUCHE_GAUCHE:
         // On passe à la slide précédente.
         onSliderGoToPrevious();
         break;
@@ -195,8 +195,7 @@ function onSliderToggle() {
     }
 }
 
-function onToolbarToggle()
-{
+function ToggleAlbumView() {
     var icon;
 
     // Modification de l'icône du lien pour afficher ou cacher la barre d'outils.
@@ -226,14 +225,13 @@ function onToolbarToggle()
 }
 
 
-function refreshSlider()
-{
+function refreshSlider() {
     var sliderLink;
     var sliderSrc;
     var sliderAlt;
 
     // Recherche des balises de contenu du carrousel.
-    sliderSrc  = document.querySelector('#slider img');
+    sliderSrc = document.querySelector('#slider img');
     sliderLink = document.querySelector('#slider a');
     sliderAlt = document.querySelector('#slider img');
 
@@ -246,26 +244,62 @@ function refreshSlider()
 
 }
 
-function adaptiveResize() 
-{
+function adaptiveResize() {
 
     var $w, $target, $h;
 
     $target = $('#slider img');
 
-    $target.each(function() 
-    {
+    $target.each(function () {
 
         $h = $(this).parent().height();
 
     });
 
-    if($h <= 560)
-    {
-        $target.css('height', 560 );
+    if ($h <= 560) {
+        $target.css('height', 560);
 
     };
 
+}
+
+function backgroundToggle() {
+    var icon;
+
+    icon = document.getElementById('slider-random');
+    if (icon.style.backgroundColor == "black") {
+        icon.style.backgroundColor = "#A5935B";
+    } else {
+        icon.style.backgroundColor = "black";
+    }
+}
+
+
+function gallery() {
+
+    var gallery;
+    for (var i = 0; i < data.photoset.photo.length; ++i)
+
+    {
+
+        // var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
+        var link = data.photoset.photo[i].url_o;
+
+        var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" +
+            data.photoset.photo[i].secret + ".jpg";
+
+        var alt = "photo numéro: " + data.photoset.photo[i].title;
+
+        var photo = {
+            link: link,
+            src: src,
+            alt: alt
+        };
+        slides.push(photo);
+
+
+        listLength += 1;
+    }
 }
 
 /***********************************************************************************/
@@ -279,20 +313,15 @@ function adaptiveResize()
  * Le gestionnaire d'évènement est une fonction anonyme que l'on donne en deuxième
  * argument directement à document.addEventListener().
  */
-document.addEventListener('DOMContentLoaded', function()
-{
-    // Initialisation du carrousel.
-    state = {};
-    state.index = 0; // On commence à la première slide
-    state.timer = null; // Le carrousel est arrêté au démarrage
+document.addEventListener('DOMContentLoaded', function () {
+    slideshow();
 
     // Installation des gestionnaires d'évènement.
-    installEventHandler('#slider-random', 'click', onSliderGoToRandom);
+    //    installEventHandler('#slider-random', 'click', onSliderGoToRandom);
     installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
     installEventHandler('#slider-next', 'click', onSliderGoToNext);
     installEventHandler('#slider-toggle', 'click', onSliderToggle);
-    installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
-
+    installEventHandler('#slider-random', 'click', backgroundToggle);
     /*
      * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
      * page, on ne recherche pas une balise en particulier dans l'arbre DOM.
@@ -302,10 +331,16 @@ document.addEventListener('DOMContentLoaded', function()
     document.addEventListener('keyup', onSliderKeyUp);
     // Equivalent à installEventHandler('html', 'keyup', onSliderKeyUp);
 
+    // Initialisation du carrousel.
+    state = {};
 
     // Affichage initial.
 
-    slideshow();
     onSliderToggle();
+    setTimeout(function () {
+        state.index = getRandomInteger(0, slides.length - 1); // On commence à la première slide
+        state.timer = null; // Le carrousel est arrêté au démarrage
+        refreshSlider();
+    }, 100);
 
 });

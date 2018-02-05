@@ -1,66 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!--   META -->
-        <meta charset="UTF-8">
-        <meta name="description" content="Mariage de Anais et Edouard">
-        <meta name="author" content="EDWRD">
-        <!--    TITLE -->
-        <link rel="shortcut icon" href="img/favicon.ico" />
-        <title>Mariage DG</title>
-        <!--    LINKS -->
-        <!--       Normalize CDN-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" integrity="sha256-VbcxqgMGQYm3q8qZMd63uETHXXZkqs7ME1bEvAY1xK8=" crossorigin="anonymous" />
-        <!--    Google Font-->
-        <link href="https://fonts.googleapis.com/css?family=Limelight|Sonsie+One" rel="stylesheet" type="text/css">
-        <!--    Font Awesome-->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-        <!--    CSS-->
+<head>
+    <!--   META -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Mariage de Anais et Edouard">
+    <meta name="author" content="EDWRD">
+    <!--    TITLE -->
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Mariage DG</title>
+    <!--    LINKS -->
+    <!--       Normalize CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" integrity="sha256-VbcxqgMGQYm3q8qZMd63uETHXXZkqs7ME1bEvAY1xK8=" crossorigin="anonymous" />
+    <!--    Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Limelight|Sonsie+One" rel="stylesheet" type="text/css">
+    <!--    Font Awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-        <link rel="stylesheet" type="text/css" href="css/mystyle2.css">
-        <!-- JAVASCRIPT -->
+    <!--    CSS-->
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/mystyle2.css">
+    <link rel="stylesheet" type="text/css" href="css/hover.css">
+    <!-- JAVASCRIPT -->
 
-        <script type="text/javascript" src="js/utilities.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
-        <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="js/utilities.js"></script>
 
-    </head>
-    <body>
-        <header>
-            <a id="#"></a>
-            <img src="img/background-eyes-good4.jpg" alt="">
-            
-        </header>
-        <main>
-            <div id="video-container">
-                <iframe src="https://www.youtube.com/embed/qxZ69kHv2OI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <script type="text/javascript" src="js/slider.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <a id="#"></a>
+        <img src="img/background-eyes-good4.jpg" alt="">
+
+    </header>
+    <main>
+        <hr>
+        <h2>They say: <span id="titlevideo">"The world only exists in your eyes. You can make as big or as small as you want"...</span><br>... Well, look how big and beautiful you made our world that day !</h2>
+
+        <div id="video-container">
+            <iframe src="https://www.youtube.com/embed/qxZ69kHv2OI?rel=0&showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+        </div>
+        <hr>
+        <h2>And because no one reaches your level of greatness: </h2>
+
+
+        <figure id="slider" class="slider">
+            <div id="back-album">
+                <a target="_blank" href=""><img src="" alt="Photo du carrousel"></a>
             </div>
-            <nav class="toolbar">
-                <ul class="hide">
-                    <li><button id="slider-previous" title="Image précédente"><i class="fa fa-backward"></i></button></li>
-                    <li><button id="slider-toggle" title="Démarrer le carrousel"><i id="slider-toggle" class="fa fa-play"></i></button></li>
-                    <li><button id="slider-next" title="Image suivante"><i class="fa fa-forward"></i></button></li>
-                    <li><button id="slider-random" title="Sélectionner une image aléatoire"><i class="fa fa-random"></i></button></li>
-                </ul>
-            </nav>
-            <figure id="slider" class="slider">
-                <div id="back-album">
-                    <a target="_blank" href=""><img src="" alt="Photo du carrousel"></a>
-                </div>
-            </figure>
+        </figure>
+        <nav class="toolbar">
+            <ul class="hide">
+                <li>
+                    <button id="slider-toggle" title="Démarrer le carrousel"><i id="slider-toggle" class="fa fa-play fa-2x"></i></button>
+                </li>
+                <li>
+                    <button id="slider-previous" title="Image précédente"><i class="fa fa-backward fa-2x"></i></button>
+                </li>
+                <li>
+                    <button id="slider-next" title="Image suivante"><i class="fa fa-forward fa-2x"></i></button>
+                </li>
+                <li>
+                    <button id="slider-random" style="background-color: #A5935B" title="Sélectionner une image aléatoire"><i class="fa fa-random fa-2x"></i></button>
+                </li>
+                <li>
+                    <button class="hvr-icon-up album" style="" title="Sélectionner une image aléatoire">Album</button>
+                </li>
+            </ul>
+        </nav>
+        <div class="gallery">
+            <a href="img/2-1.jpg" data-caption="Image caption">
+                <img src="img/thumbnails/2-1.jpg" alt="First image">
+            </a>
+            <a href="img/2-2.jpg">
+                <img src="img/thumbnails/2-2.jpg" alt="Second image">
+            </a>
+            ...
+        </div>
 
-          </main>
+    </main>
     <footer>
-        <ul>
-            <li>
-                <a href="#">Home</a>
-                <a href="https://www.facebook.com/events/1277598972304211/" target="_blank">Facebook</a>
-            </li>
-        </ul>
         <small id="copyright">Copyright © MariageDG 2017</small>
     </footer>
-    </body>
+</body>
+
 </html>
