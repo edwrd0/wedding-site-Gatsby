@@ -275,33 +275,40 @@ function backgroundToggle() {
 }
 
 
-function gallery() {
+function gallerySetUp() {
 
     var gallery;
-    for (var i = 0; i < data.photoset.photo.length; ++i)
+    var htmlContent;
+    var mydata = $.getJSON('/js/flickr_original.json', function (data) {
 
-    {
+        for (var i = 0; i < data.photoset.photo.length; ++i)
 
-        // var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id ;
-        var link = data.photoset.photo[i].url_o;
+        {
 
-        var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" +
-            data.photoset.photo[i].secret + ".jpg";
+            var link = "https://www.flickr.com/photos/" + data.photoset.owner + "/" + data.photoset.photo[i].id;
+            //        var link = data.photoset.photo[i].url_o;
 
-        var alt = "photo numéro: " + data.photoset.photo[i].title;
+            var src = "https://farm" + data.photoset.photo[i].farm + ".static.flickr.com/" + data.photoset.photo[i].server + "/" + data.photoset.photo[i].id + "_" +
+                data.photoset.photo[i].secret + ".jpg";
 
-        var photo = {
-            link: link,
-            src: src,
-            alt: alt
+            //                var alt = "photo numéro: " + data.photoset.photo[i].title;
+
+            var htmlContent = '<a href="' + link + '" data-caption="Image caption"><img src="' + src + '" alt="' + i + ' image"></a>';
+
+
+            //            '<a href="https://www.flickr.com/photos/' + data.photoset.owner + '/' + data.photoset.photo[i].id '" data-caption="Image caption"><img src="https://farm' + data.photoset.photo[i].farm + '.static.flickr.com/' + data.photoset.photo[i].server + '/' + data.photoset.photo[i].id + '_' +
+            //            data.photoset.photo[i].secret + '.jpg" alt="' + i + ' image"></a>';
+            gallery = gallery + htmlContent;
         };
-        slides.push(photo);
 
-
-        listLength += 1;
-    }
+    });
+    console.log(gallery);
+    document.querySelector('gallery').innerHTML = gallery;
 }
 
+function galleryShow() {
+
+}
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
 /***********************************************************************************/
@@ -341,6 +348,7 @@ document.addEventListener('DOMContentLoaded', function () {
         state.index = getRandomInteger(0, slides.length - 1); // On commence à la première slide
         state.timer = null; // Le carrousel est arrêté au démarrage
         refreshSlider();
+        gallerySetUp();
     }, 100);
 
 });
